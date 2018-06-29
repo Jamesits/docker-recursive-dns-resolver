@@ -10,10 +10,10 @@ WORKDIR /tmp
 RUN apt-get update -y && \
     apt-get full-upgrade -y && \
     apt-get install -y curl gnupg2 && \
-    echo '$KNOT_RESOLVER_REPOSITORY_CONFIG' > /etc/apt/sources.list.d/knot-resolver.list && \
+    echo $KNOT_RESOLVER_REPOSITORY_CONFIG > /etc/apt/sources.list.d/knot-resolver.list && \
     curl -sSL "$KNOT_RESOLVER_RELEASE_KEY_URL" | apt-key add - && \
     apt-get update -y && \
-    apt-get install -y make knot-resolver lua-yilesystem supervisor golang-1.10-go git-core dnsutils && \
+    apt-get install -y make knot-resolver lua-filesystem supervisor golang-1.10 git-core dnsutils ca-certificates && \
     mkdir "$GOPATH" && \
     git clone https://github.com/m13253/dns-over-https.git && \
     cd dns-over-https && \
