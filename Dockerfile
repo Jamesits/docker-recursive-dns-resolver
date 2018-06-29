@@ -6,10 +6,12 @@ ARG KNOT_RESOLVER_REPOSITORY_CONFIG="deb http://download.opensuse.org/repositori
 ARG GOPATH=/tmp/gopath
 WORKDIR /tmp
 
-RUN echo '$KNOT_RESOLVER_REPOSITORY_CONFIG' > /etc/apt/sources.list.d/knot-resolver.list && \
+RUN apt-get update -f && \
+    apt-get full-upgrade -f && \
+    apt-get install curl gnupg2 && \
+    echo '$KNOT_RESOLVER_REPOSITORY_CONFIG' > /etc/apt/sources.list.d/knot-resolver.list && \
     curl $KNOT_RESOLVER_RELEASE_KEY_URL | apt-key add - && \
     apt-get update -f && \
-    apt-get full-upgrade -f && \
     apt-get install -f make knot-resolver lua-filesystem supervisor golang-1.10-go git-core dnsutils && \
     mkdir "$GOPATH" && \
     git clone https://github.com/m13253/dns-over-https.git && \
@@ -17,7 +19,7 @@ RUN echo '$KNOT_RESOLVER_REPOSITORY_CONFIG' > /etc/apt/sources.list.d/knot-resol
     make && \
     make install && \
     rm -rf * && \
-    apt-get purge -f make golang-1.10-go git-core && \
+    apt-get purge -f curl make golang-1.10-go git-core && \
     rm -r /var/lib/apt/lists/*
 
 COPY config /
