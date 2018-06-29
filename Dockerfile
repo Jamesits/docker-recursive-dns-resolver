@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 LABEL maintainer="docker@public.swineson.me"
 
+ARG DEBIAN_FRONTEND=noninteractive
 ARG KNOT_RESOLVER_RELEASE_KEY_URL=https://download.opensuse.org/repositories/home:CZ-NIC:knot-resolver-latest/xUbuntu_18.04/Release.key
 ARG KNOT_RESOLVER_REPOSITORY_CONFIG="deb http://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_18.04/ /"
 ARG GOPATH=/tmp/gopath
@@ -10,7 +11,7 @@ RUN apt-get update -y && \
     apt-get full-upgrade -y && \
     apt-get install -y curl gnupg2 && \
     echo '$KNOT_RESOLVER_REPOSITORY_CONFIG' > /etc/apt/sources.list.d/knot-resolver.list && \
-    curl $KNOT_RESOLVER_RELEASE_KEY_URL | apt-key add - && \
+    curl -sSL "$KNOT_RESOLVER_RELEASE_KEY_URL" | apt-key add - && \
     apt-get update -y && \
     apt-get install -y make knot-resolver lua-yilesystem supervisor golang-1.10-go git-core dnsutils && \
     mkdir "$GOPATH" && \
