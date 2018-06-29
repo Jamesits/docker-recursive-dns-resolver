@@ -1,0 +1,8 @@
+version: 3.0
+stages:
+	- build
+docker_image:
+	stage: build
+	job_type: image_build
+	dockerfile_path: /Dockerfile
+	build_dir: /
