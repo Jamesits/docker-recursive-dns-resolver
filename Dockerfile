@@ -5,6 +5,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG KNOT_RESOLVER_RELEASE_KEY_URL=https://download.opensuse.org/repositories/home:CZ-NIC:knot-resolver-latest/xUbuntu_18.04/Release.key
 ARG KNOT_RESOLVER_REPOSITORY_CONFIG="deb http://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_18.04/ /"
 ARG GOPATH=/tmp/gopath
+
+ENV BOOTSTRAP_DNS_SERVER=2001:470:20::2,74.82.42.42,101.6.6.6
+
 WORKDIR /tmp
 
 RUN apt-get update -y && \
