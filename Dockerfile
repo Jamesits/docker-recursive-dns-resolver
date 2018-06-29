@@ -8,7 +8,7 @@ WORKDIR /tmp
 
 RUN apt-get update -y && \
     apt-get full-upgrade -y && \
-    apt-get install curl gnupg2 && \
+    apt-get install -y curl gnupg2 && \
     echo '$KNOT_RESOLVER_REPOSITORY_CONFIG' > /etc/apt/sources.list.d/knot-resolver.list && \
     curl $KNOT_RESOLVER_RELEASE_KEY_URL | apt-key add - && \
     apt-get update -y && \
