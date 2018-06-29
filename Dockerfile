@@ -4,7 +4,6 @@ LABEL maintainer="docker@public.swineson.me"
 ARG DEBIAN_FRONTEND=noninteractive
 ARG KNOT_RESOLVER_RELEASE_KEY_URL=https://download.opensuse.org/repositories/home:CZ-NIC:knot-resolver-latest/xUbuntu_18.04/Release.key
 ARG KNOT_RESOLVER_REPOSITORY_CONFIG="deb http://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_18.04/ /"
-ARG PATH="/usr/lib/go-1.10/bin/:${PATH}"
 ARG GOPATH=/tmp/gopath
 WORKDIR /tmp
 
@@ -15,6 +14,7 @@ RUN apt-get update -y && \
     curl -sSL "$KNOT_RESOLVER_RELEASE_KEY_URL" | apt-key add - && \
     apt-get update -y && \
     apt-get install -y make knot-resolver lua-filesystem supervisor golang-1.10-go git-core dnsutils ca-certificates && \
+    ln -s /usr/lib/go-1.10/bin/go /bin/go && \
     mkdir "$GOPATH" && \
     git clone https://github.com/m13253/dns-over-https.git && \
     cd dns-over-https && \
