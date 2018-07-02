@@ -25,13 +25,14 @@ RUN apt-get update -y && \
     make install && \
     rm -rf * && \
     apt-get purge -y curl make golang-1.10-go git-core && \
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
 
 COPY config /
 COPY entrypoint.sh /entrypoint.sh
 COPY supervisor.conf /etc/supervisor/supervisor.conf
 
-EXPOSE 9001
+EXPOSE 53/udp 53/tcp 80/tcp
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisor/supervisor.conf", "-n"]
 HEALTHCHECK none
