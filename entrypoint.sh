@@ -15,7 +15,7 @@ if [ -f /usr/share/dns/root.key ]; then
 fi
 
 # try populate root hints
-curl -sSL https://www.internic.net/domain/named.root -O /config/knot-resolver/named.root
+curl -sSL https://www.internic.net/domain/named.root -o /config/knot-resolver/named.root
 
 echo "" > /etc/resolv.conf
 echo "DNS configuration for bootstrap:"
