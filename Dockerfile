@@ -16,7 +16,7 @@ RUN apt-get update -y && \
     echo $KNOT_RESOLVER_REPOSITORY_CONFIG > /etc/apt/sources.list.d/knot-resolver.list && \
     curl -sSL "$KNOT_RESOLVER_RELEASE_KEY_URL" | apt-key add - && \
     apt-get update -y && \
-    apt-get install -y make knot-resolver lua-filesystem supervisor golang-1.10-go git-core dnsutils ca-certificates && \
+    apt-get install -y make knot-resolver lua-filesystem supervisor golang-1.10-go git-core dnsutils ca-certificates dns-root-data && \
     ln -s /usr/lib/go-1.10/bin/go /bin/go && \
     mkdir "$GOPATH" && \
     git clone https://github.com/m13253/dns-over-https.git && \
