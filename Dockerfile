@@ -25,7 +25,7 @@ RUN apt-get update -y && \
     make install && \
     rm -rf * && \
     apt-get purge -y make golang-1.10-go git-core && \
-    apt-get autoremove && \
+    apt-get autoremove -y && \
     rm -f /bin/go && \
     rm -rf /var/lib/apt/lists/*
 
