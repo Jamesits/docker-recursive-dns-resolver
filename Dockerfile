@@ -25,8 +25,7 @@ RUN apt-get update -y && \
     make install && \
     rm -rf * && \
     apt-get purge -y curl make golang-1.10-go git-core && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/*
+    rm -rf /var/lib/apt/lists/*
 
 COPY config /
 COPY entrypoint.sh /entrypoint.sh
