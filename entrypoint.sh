@@ -9,7 +9,7 @@ fi
 # populate DNS root key if already available as package
 if [ -f /usr/share/dns/root.key ]; then
     echo "Populating DNS root key..."
-    cp -i /usr/share/dns/root.key /config/knot-resolver/root.key
+    cp -f /usr/share/dns/root.key /config/knot-resolver/root.key
 fi
 
 echo "" > /etc/resolv.conf
